@@ -6,13 +6,13 @@ using UnityEngine.EventSystems;
 public class TilebankController : MonoBehaviour
 {
     public SpriteRenderer rendererTile;
-    public SpriteRenderer rendererExtra;
+    public SpriteRenderer rendererBonusItem;
 
     [SerializeField]
     public List<TileVariant> tileVariantList = new List<TileVariant>();
 
-    private TileVariant nextTileVariant;
-    private int lastTileVariantChildIdx;
+    private TileVariant nextTileVariant;    // crossx, straight, corner, ...
+    private int lastTileVariantChildIdx;    // ratatation direction of tile variant (nax. 4 directions)
 
     private System.Random rnd;
 
@@ -37,7 +37,7 @@ public class TilebankController : MonoBehaviour
         int variantIdx = rnd.Next(tileVariantList.Count - 2) + 2; // -2 to exclude start and finish tile (which currently also reside inside tilevariants list)
 
         nextTileVariant = tileVariantList[variantIdx];
-        nextTileVariant.hasExtra = rnd.Next(100) < 20;
+        nextTileVariant.hasBonusItem = rnd.Next(100) < 20;
 
         lastTileVariantChildIdx = 0;
 
@@ -60,15 +60,15 @@ public class TilebankController : MonoBehaviour
         return nextTileVariant;
     }
 
-    public int getRotationIndex() {
+    public int getTileVariantRotationIndex() {
         return lastTileVariantChildIdx;
     }
 
     private void updateTilebank() {
         Sprite spr = nextTileVariant.spriteList[lastTileVariantChildIdx];
         rendererTile.sprite = spr;
-        
-        rendererExtra.enabled = nextTileVariant.hasExtra;
+
+        rendererBonusItem.enabled = nextTileVariant.hasBonusItem;
     }
 
     void OnMouseDown() {
@@ -81,7 +81,7 @@ public class TilebankController : MonoBehaviour
     public class TileVariant {
         public List<Sprite> spriteList = new List<Sprite>();
         public List<string> canConnectAt = new List<string>();
-        public bool hasExtra = false;
+        public bool hasBonusItem = false;
 
         public TileVariant() {
 

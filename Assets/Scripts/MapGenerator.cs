@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    public static string TAG_PLAYER = "Player";
+    public static string TAG_FINISH = "Finish";
+
     public Sprite gridBackground;
     public Sprite spriteStart;
     public Sprite spriteExit;
@@ -38,7 +41,7 @@ public class MapGenerator : MonoBehaviour
         rnd = new System.Random();
 
         tilebankController = tileBank.GetComponent<TilebankController>();
-        playerGO = GameObject.Find("player");
+        playerGO = GameObject.Find(WorldConstants.objName_player);
     }
 
     void Start()
@@ -48,13 +51,7 @@ public class MapGenerator : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) {
-            init();
-        }
-
         updateCameraFOV(grid.GetLength(0) + margin, 9 + margin);
-
-        //print(pixelPos2WorldPos( Input.mousePosition));
 
         // place selected tile on click
         if (Input.GetMouseButtonDown(0)) {
@@ -65,14 +62,14 @@ public class MapGenerator : MonoBehaviour
                 PlayerController pl = playerGO.GetComponent<PlayerController>();
 
                 // instantiate tile
-                Sprite spr = tilebankController.getCurrentVariant().spriteList[tilebankController.getRotationIndex()];
+                Sprite spr = tilebankController.getCurrentVariant().spriteList[tilebankController.getTileVariantRotationIndex()];
                 Tile tileTemplate = createTile((int)pp.x, (int)pp.y, spr);
-                tileTemplate.canConnectAt = tilebankController.getCurrentVariant().canConnectAt[tilebankController.getRotationIndex()];
-                tileTemplate.hasExtra = tilebankController.getCurrentVariant().hasExtra;
+                tileTemplate.canConnectAt = tilebankController.getCurrentVariant().canConnectAt[tilebankController.getTileVariantRotationIndex()];
+                tileTemplate.hasBonusItem = tilebankController.getCurrentVariant().hasBonusItem;
                 spawnTile(tileTemplate);
 
-                // add treasure when tile hasExtra==true
-                if (tileTemplate.hasExtra) {
+                // add treasure when tile hasBonusItem==true
+                if (tileTemplate.hasBonusItem) {
                     GameObject goTreasure = (GameObject)Object.Instantiate(prefabTreasure);
                     goTreasure.transform.position = new Vector3((int)pp.x, (int)pp.y, 0);
                     goTreasure.transform.SetParent(spriteContainer);
@@ -174,8 +171,8 @@ public class MapGenerator : MonoBehaviour
         // create start and finish
         tileStart = spawnTile(createTile(0, 0, spriteStart));
         tileEnd = spawnTile(createTile(grid.GetLength(0) - 1, grid.GetLength(1) - 1, spriteExit));
-        tileEnd.go.tag = "Finish";
-        tileEnd.go.name = "Finish";
+        tileEnd.go.tag = TAG_FINISH;
+        tileEnd.go.name = TAG_FINISH;
         CircleCollider2D endTileCollider = tileEnd.go.AddComponent<CircleCollider2D>();
         endTileCollider.isTrigger = true;
         endTileCollider.radius = 0.1f;
@@ -195,6 +192,7 @@ public class MapGenerator : MonoBehaviour
         bool createdHeart = pl.hp == pl.maxHP;  // only spawn heart when players HP is not full
         bool createdKey = false;
         for (int i = 0; i < numTiles; i++) {
+
             // next random tile
             tilebankController.nextRandomTileVariant();
 
@@ -211,14 +209,14 @@ public class MapGenerator : MonoBehaviour
                 spawnTile(tileTemplate);
 
                 // spawn ghosts, treasures
-                int chanceExtra = rnd.Next(100);
-                if (chanceExtra < 50 && currentStage > 1) {
+                int chanceBonusItem = rnd.Next(100);
+                if (chanceBonusItem < 50 && currentStage > 1) {
                     GameObject goGhost = (GameObject)Object.Instantiate(prefabGhost);
                     goGhost.transform.position = new Vector3(posX, posY, 0);
                     goGhost.transform.SetParent(spriteContainer);
                     PlayerController plGhost = goGhost.GetComponent<PlayerController>();
                     ghostList.Add(plGhost);
-                } else if (chanceExtra < 60 && currentStage > 1) {
+                } else if (chanceBonusItem < 60 && currentStage > 1) {
                     GameObject goTreasure = (GameObject)Object.Instantiate(prefabTreasure);
                     goTreasure.transform.position = new Vector3(posX, posY, 0);
                     goTreasure.transform.SetParent(spriteContainer);
@@ -527,7 +525,7 @@ public class MapGenerator : MonoBehaviour
         public Node node;
         public string canConnectAt = "0123";
 
-        public bool hasExtra = false;
+        public bool hasBonusItem = false;
 
         public int gridX;
         public int gridY;

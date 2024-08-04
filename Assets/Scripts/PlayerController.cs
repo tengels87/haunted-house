@@ -113,8 +113,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (this.gameObject != collision.gameObject) {
-            if (this.gameObject.tag == "Player") {
-                if (collision.gameObject.tag == "Finish") {
+            if (this.gameObject.tag == MapGenerator.TAG_PLAYER) {
+                if (collision.gameObject.tag == MapGenerator.TAG_FINISH) {
 
                     // generate next level
                     StartCoroutine(CoroutineFreeze(() => {

@@ -351,25 +351,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rendererTile: {fileID: 1218917490}
-  rendererExtra: {fileID: 1537210873}
+  rendererBonusItem: {fileID: 1537210873}
   tileVariantList:
   - spriteList:
     - {fileID: 21300000, guid: 794e8df911b8552449723a221f65c50b, type: 3}
     canConnectAt:
     - 0123
-    hasExtra: 0
+    hasBonusItem: 0
   - spriteList:
     - {fileID: 21300000, guid: 0037a1108cfba6c4da31c7cbb9a4690c, type: 3}
     canConnectAt:
     - 0123
-    hasExtra: 0
+    hasBonusItem: 0
   - spriteList:
     - {fileID: 21300000, guid: 203eee6b06f336848aa8cec28f87039d, type: 3}
     - {fileID: 21300000, guid: f6cb9a53748cf8149b66c847d1c832f8, type: 3}
     canConnectAt:
     - 02
     - 13
-    hasExtra: 0
+    hasBonusItem: 0
   - spriteList:
     - {fileID: 21300000, guid: cdc358e4c237a6e46a3b9f58a90bfd68, type: 3}
     - {fileID: 21300000, guid: 1218b8ca92ae419439365318b6c12cbb, type: 3}
@@ -380,7 +380,7 @@ MonoBehaviour:
     - 12
     - 23
     - 03
-    hasExtra: 0
+    hasBonusItem: 0
   - spriteList:
     - {fileID: 21300000, guid: 21f44bbdbe097dd419d50d98e99d331d, type: 3}
     - {fileID: 21300000, guid: aa57d334d7e85ef44b0f7a6ff72a6d61, type: 3}
@@ -391,12 +391,12 @@ MonoBehaviour:
     - 123
     - 023
     - 013
-    hasExtra: 0
+    hasBonusItem: 0
   - spriteList:
     - {fileID: 21300000, guid: 794e8df911b8552449723a221f65c50b, type: 3}
     canConnectAt:
     - 0123
-    hasExtra: 0
+    hasBonusItem: 0
 --- !u!61 &387564077
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -969,7 +969,7 @@ GameObject:
   - component: {fileID: 1537210872}
   - component: {fileID: 1537210873}
   m_Layer: 0
-  m_Name: extra
+  m_Name: bonusTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
