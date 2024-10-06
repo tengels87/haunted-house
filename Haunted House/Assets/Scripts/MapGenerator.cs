@@ -16,6 +16,7 @@ public class MapGenerator : MonoBehaviour
     public Object prefabTreasure;
     public Object prefabHeart;
     public Object prefabKey;
+    public Object prefabGem;
 
     public GameObject tileBank;
 
@@ -208,26 +209,9 @@ public class MapGenerator : MonoBehaviour
                 tileTemplate.canConnectAt = tilebankController.getCurrentVariant().canConnectAt[rndRotation];
                 spawnTile(tileTemplate);
 
-                // spawn ghosts, treasures
+                // spawn ghosts, treasures, key, heart, gems
                 int chanceBonusItem = rnd.Next(100);
-                if (chanceBonusItem < 50 && currentStage > 1) {
-                    GameObject goGhost = (GameObject)Object.Instantiate(prefabGhost);
-                    goGhost.transform.position = new Vector3(posX, posY, 0);
-                    goGhost.transform.SetParent(spriteContainer);
-                    PlayerController plGhost = goGhost.GetComponent<PlayerController>();
-                    ghostList.Add(plGhost);
-                } else if (chanceBonusItem < 60 && currentStage > 1) {
-                    GameObject goTreasure = (GameObject)Object.Instantiate(prefabTreasure);
-                    goTreasure.transform.position = new Vector3(posX, posY, 0);
-                    goTreasure.transform.SetParent(spriteContainer);
-                    pl.addTarget(tileTemplate.getPosition());
-                } else if (!createdHeart) {
-                    createdHeart = true;
-                    GameObject goHeart = (GameObject)Object.Instantiate(prefabHeart);
-                    goHeart.transform.position = new Vector3(posX, posY, 0);
-                    goHeart.transform.SetParent(spriteContainer);
-                    pl.addTarget(tileTemplate.getPosition());
-                } else if (!createdKey && currentStage > 3) {
+                if (!createdKey && currentStage > 3) {
                     createdKey = true;
                     GameObject goKey = (GameObject)Object.Instantiate(prefabKey);
                     goKey.transform.position = new Vector3(posX, posY, 0);
@@ -245,6 +229,28 @@ public class MapGenerator : MonoBehaviour
                     lockedDoorCollider.isTrigger = true;
                     lockedDoorCollider.radius = 0.1f;
                     tileEnd.go.transform.SetParent(spriteContainer);
+                } else if (chanceBonusItem < 30) {
+                    GameObject goGem = (GameObject)Object.Instantiate(prefabGem);
+                    goGem.transform.position = new Vector3(posX, posY, 0);
+                    goGem.transform.SetParent(spriteContainer);
+                    pl.addTarget(tileTemplate.getPosition());
+                } else if (chanceBonusItem < 50 && currentStage > 1) {
+                    GameObject goGhost = (GameObject)Object.Instantiate(prefabGhost);
+                    goGhost.transform.position = new Vector3(posX, posY, 0);
+                    goGhost.transform.SetParent(spriteContainer);
+                    PlayerController plGhost = goGhost.GetComponent<PlayerController>();
+                    ghostList.Add(plGhost);
+                } else if (chanceBonusItem < 60 && currentStage > 1) {
+                    GameObject goTreasure = (GameObject)Object.Instantiate(prefabTreasure);
+                    goTreasure.transform.position = new Vector3(posX, posY, 0);
+                    goTreasure.transform.SetParent(spriteContainer);
+                    pl.addTarget(tileTemplate.getPosition());
+                } else if (!createdHeart) {
+                    createdHeart = true;
+                    GameObject goHeart = (GameObject)Object.Instantiate(prefabHeart);
+                    goHeart.transform.position = new Vector3(posX, posY, 0);
+                    goHeart.transform.SetParent(spriteContainer);
+                    pl.addTarget(tileTemplate.getPosition());
                 }
             }
         }

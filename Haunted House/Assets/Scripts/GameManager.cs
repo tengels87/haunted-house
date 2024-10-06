@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int stage = 0;
 
     private int score;
+    private int gems;
 
     void Awake() {
         //DontDestroyOnLoad(this);
@@ -41,8 +42,16 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadSceneAsync(sceneName);
     }
 
-    public void changeScore(int val) {
+    public int changeScore(int val) {
         score = score + val;
+
+        return score;
+    }
+
+    public int addGem() {
+        gems = gems + 1;
+
+        return gems;
     }
 
     public void showMainManu() {

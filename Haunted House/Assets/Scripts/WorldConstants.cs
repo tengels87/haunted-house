@@ -4,9 +4,11 @@ using System.Collections.Generic;
 
 public sealed class WorldConstants {
     public static string objName_gameManager = "GameManager";
+    public static string objName_hudManager = "HUDmanager";
     public static string objName_player = "player";
 
     public GameManager gameManager;
+    public HudManager hudManager;
     public Transform player;
 
     private System.Random rnd = new System.Random();
@@ -32,6 +34,14 @@ public sealed class WorldConstants {
         }
 
         return gameManager;
+    }
+
+    public HudManager getHudManager() {
+        if (hudManager == null) {
+            hudManager = GameObject.Find(objName_hudManager).GetComponent<HudManager>();
+        }
+
+        return hudManager;
     }
 
     public Transform getPlayer() {

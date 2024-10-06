@@ -25,10 +25,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        /*
         if (Input.GetMouseButtonDown(1)) {
-            //Vector2 targetPos = Input.mousePosition;
-            //waypointList.Add(MapGenerator.pixelPos2WorldPos(targetPos) - Vector2.one * 0.5f);
+            StartCoroutine(CoroutineFreeze(() => {
+                hasKey = false;
+                WorldConstants.Instance.getGameManager().mapGenerator.generateLevel();
+            }));
         }
+        */
 
         // walk along path
         if (waypointList.Count > 0) {
@@ -129,6 +133,18 @@ public class PlayerController : MonoBehaviour
                         if (enemyController != null) {
                             enemyController.kill();
                             WorldConstants.Instance.getGameManager().changeScore(100);
+                            WorldConstants.Instance.getGameManager().soundCollectTreasure.Play();
+                        }
+                    }));
+                } else if (collision.gameObject.tag == "gem") {
+
+                    // collect treasure
+                    StartCoroutine(CoroutineFreeze(() => {
+                        PlayerController enemyController = collision.gameObject.GetComponent<PlayerController>();
+                        if (enemyController != null) {
+                            enemyController.kill();
+                            int currentGemCount = WorldConstants.Instance.getGameManager().addGem();
+                            WorldConstants.Instance.getHudManager().setGemCounter(currentGemCount);
                             WorldConstants.Instance.getGameManager().soundCollectTreasure.Play();
                         }
                     }));

@@ -805,6 +805,7 @@ MonoBehaviour:
   prefabTreasure: {fileID: 1764053010643491507, guid: ce6bf5ad6e8294d4dbe328ed9df4b9cf, type: 3}
   prefabHeart: {fileID: 1764053010643491507, guid: d058746e8637b2f43a64b44e6794eae0, type: 3}
   prefabKey: {fileID: 1764053010643491507, guid: 4c2d02f8baabb714186b2b09368afd2a, type: 3}
+  prefabGem: {fileID: 1764053010643491507, guid: 2f481b6ff8301b84eb62f6e9c71808d1, type: 3}
   tileBank: {fileID: 387564073}
 --- !u!1001 &1179014707
 PrefabInstance:
@@ -1042,6 +1043,74 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1548217801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1548217804}
+  - component: {fileID: 1548217803}
+  - component: {fileID: 1548217802}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1548217802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548217801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &1548217803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548217801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &1548217804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548217801}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1754440476
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,7 +1250,7 @@ GameObject:
   - component: {fileID: 1905564886}
   - component: {fileID: 1905564885}
   m_Layer: 0
-  m_Name: HUD
+  m_Name: HUDmanager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1203,6 +1272,7 @@ MonoBehaviour:
   spriteHpBackground: {fileID: 21300000, guid: 243e4dcea8626b749926d72830e4c62f, type: 3}
   spriteHp: {fileID: 21300000, guid: d7eec35c2f117a04d9c73bdf0df8d5d3, type: 3}
   spriteKey: {fileID: 21300000, guid: 6670bd4ae919eb14982dbbfc6cf8f1ff, type: 3}
+  prefabGemCounter: {fileID: 7304553158309906753, guid: 8c3b8c39611deba469b046079e78a885, type: 3}
 --- !u!4 &1905564886
 Transform:
   m_ObjectHideFlags: 0
