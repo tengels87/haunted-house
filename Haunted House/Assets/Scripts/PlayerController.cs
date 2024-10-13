@@ -25,14 +25,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        /*
+        
         if (Input.GetMouseButtonDown(1)) {
             StartCoroutine(CoroutineFreeze(() => {
                 hasKey = false;
                 WorldConstants.Instance.getGameManager().mapGenerator.generateLevel();
             }));
         }
-        */
+        
 
         // walk along path
         if (waypointList.Count > 0) {
@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
                     }));
                 } else if (collision.gameObject.tag == "gem") {
 
-                    // collect treasure
+                    // collect gem
                     StartCoroutine(CoroutineFreeze(() => {
                         PlayerController enemyController = collision.gameObject.GetComponent<PlayerController>();
                         if (enemyController != null) {
@@ -153,8 +153,11 @@ public class PlayerController : MonoBehaviour
                     // collect key
                     StartCoroutine(CoroutineFreeze(() => {
                         hasKey = true;
+
+                        // add finish tile to player targets list
                         addTarget(WorldConstants.Instance.getGameManager().mapGenerator.getExitTile().getPosition());
                         WorldConstants.Instance.getGameManager().mapGenerator.checkPlayerPath();
+
                         PlayerController enemyController = collision.gameObject.GetComponent<PlayerController>();
                         if (enemyController != null) {
                             enemyController.kill();
